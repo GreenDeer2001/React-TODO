@@ -3,9 +3,14 @@ import "./App.css";
 import ListContainer from "./Containers/ListContainers";
 
 function App() {
-  const [Tasks, addTask] = React.useState([
-    { id: 1, text: "WOWOWOWOWOWOW", type: 1 },
-  ]);
+
+  const getTaskFromLocalStorage = () =>{
+      const tasks = JSON.parse(localStorage.getItem("tasks"))
+      console.log(tasks)
+     return tasks ? tasks : [];
+  }
+  
+  const [Tasks, addTask] = React.useState(getTaskFromLocalStorage);
 
   const addTaskHander = (message) => {
     const task = {
@@ -15,6 +20,11 @@ function App() {
     };
     addTask((prev) => prev.concat(task));
   };
+
+  React.useEffect( ()=>{
+    localStorage.setItem("tasks",JSON.stringify(Tasks));
+  })
+
 
   const changeHandler = (id, type) => {
     const updatedTask = Tasks.find((task) => task.id === id);

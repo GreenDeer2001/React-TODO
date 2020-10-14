@@ -4,35 +4,26 @@ function item(props) {
   return (
     <li className="listItem">
       <p>
-        {item.type !== 1 ? (
+        {props.itemType !== 1 && (
           <span>
             <button
               onClick={() => props.change(props.itemId, props.itemType - 1)}
-              className="btn"
-            >
-              {"<"}
-            </button>
+              className="btn">{"<"}</button>
           </span>
-        ) : null}
+        )}
         {props.itemText}
         <span>
           <button
             onClick={() => props.delete(props.itemId)}
-            className="btn btn-delete"
-          >
-            {"X"}
-          </button>
+            className="btn btn-delete">{"X"}</button>
         </span>
-        {item.type !== 3 ? (
+        {props.itemType !== 3 && (
           <span>
             <button
               onClick={() => props.change(props.itemId, props.itemType + 1)}
-              className="btn"
-            >
-              {">"}
-            </button>
+              className="btn">{">"}</button>
           </span>
-        ) : null}
+        )}
       </p>
     </li>
   );
